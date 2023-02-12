@@ -1,0 +1,18 @@
+.books-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 24px;
+}
+
+.book-row__comp {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 620px) {
+    .books-flex {
+        justify-content: space-evenly;
+    }
+}
+
