@@ -1,23 +1,24 @@
+/* eslint-disable no-negated-condition */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { arrRoutes } from '../../utils/array-routes';
+import { getCategory } from '../../features/category/categorySlice';
+import { useAppDispatch, useAppSelector } from '../../hook';
 import { IBurger } from '../../utils/type';
 
 import './name-nav-component.css';
 
-export const NameNavComponent: React.FC<IBurger> = ({
-  burger,
-  closeBurger,
-  idbook,
-  widthScreenRes,
-}) => {
+export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idbook, widthScreenRes }) => {
   const [color, setColor] = useState(true);
   const [hideBooks, setHideBooks] = useState(true);
   const [widthScreen, setWidth] = useState(window.innerWidth);
+
+  const dispatch = useAppDispatch();
+  const { category, loadingCategory } = useAppSelector((state) => state.categoryRed);
+  const { loadingBoook } = useAppSelector((state) => state.booksRed);
 
   const addColor = () => {
     setColor(true);
@@ -48,7 +49,9 @@ export const NameNavComponent: React.FC<IBurger> = ({
     setWidth(window.innerWidth);
   }, [burger]);
 
-
+  useEffect(() => {
+    dispatch(getCategory());
+  }, [dispatch]);
 
   return (
     <aside
@@ -106,28 +109,33 @@ export const NameNavComponent: React.FC<IBurger> = ({
         </NavLink>
 
         <ul className={hideBooks ? 'navigation-book__list' : 'books-none'} data-test-id='burger-navigation'>
-          {arrRoutes.slice(1).map((item) => (
-            <li
-              key={item.id}
-              className='navigation-book__item'
-              data-test-id={widthScreen > 769 ? 'navigation-books' : 'burger-books'}
-            >
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? 'active-main-link link-book' : 'navigation-book__link link-book'
-                }
-                to={item.path}
-                onClick={() => {
-                  addColor();
-                  closeBurger();
-                }}
-                data-test-id='burger-books'
+          {!loadingCategory && !loadingBoook? (
+            category &&
+            category.map((item) => (
+              <li
+                key={item.id}
+                className='navigation-book__item'
+                data-test-id={widthScreen > 769 ? 'navigation-books' : 'burger-books'}
               >
-                {item.name}
-              </NavLink>
-              <span className='count-book'>{item.count}</span>
-            </li>
-          ))}
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? 'active-main-link link-book' : 'navigation-book__link link-book'
+                  }
+                  to={`book/${item.path}`}
+                  onClick={() => {
+                    addColor();
+                    closeBurger();
+                  }}
+                  data-test-id='burger-books'
+                >
+                  {item.name}
+                </NavLink>
+                <span className='count-book'>10</span>
+              </li>
+            ))
+          ) : (
+            <h1>Загрузка</h1>
+          )}
         </ul>
       </nav>
       <nav className='main-block__navigation-page'>
@@ -151,10 +159,10 @@ export const NameNavComponent: React.FC<IBurger> = ({
           <li
             className='navigation-page__item'
             onClick={() => {
-                addHideBooksBlock();
-                removeColor();
-                closeBurger();
-              }}
+              addHideBooksBlock();
+              removeColor();
+              closeBurger();
+            }}
             data-test-id={widthScreen > 769 ? 'navigation-contract' : 'burger-contract'}
           >
             <NavLink

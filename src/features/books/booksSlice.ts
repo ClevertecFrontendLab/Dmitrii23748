@@ -11,7 +11,7 @@ import { IBoooks, IBoooksingle } from '../../utils/type';
 
 const initialState: IBoooks = {
   books: [],
-  loading: false,
+  loadingBoook: false,
   error: null,
 };
 
@@ -28,12 +28,12 @@ export const booksSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getBooks.pending, (state) => {
-        state.loading = true;
+        state.loadingBoook = true;
         state.error = null;
       })
       .addCase(getBooks.fulfilled, (state, action) => {
         state.books = action.payload;
-        state.loading = false;
+        state.loadingBoook = false;
       })
       .addCase(getBooks.rejected, (state, action) => {
         console.log('rejected', state);

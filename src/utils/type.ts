@@ -68,6 +68,18 @@ export interface IControl {
   }
   export interface IBoooks {
     books: IBoooksingle[];
-    loading: boolean;
+    loadingBoook: boolean;
+    error: string | null;
+  }
+
+  export interface ICategory {
+    name: string;
+    path: string;
+    id: number;
+  }
+
+  export interface ICategorys {
+    category: ICategory[];
+    loadingCategory: boolean;
     error: string | null;
   }

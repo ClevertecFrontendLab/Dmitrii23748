@@ -15,8 +15,11 @@ export const BookColumnComponent: React.FC<IBoooksingle> = ({ authors, title, ra
   return (
     <div className='book-column' data-test-id='card'>
       <div className='book-column__img-block-b'>
-        {/* <img className='book-column__img-b' src={bookCat} alt='bookImg' /> */}
-        <img className='book-column__img-b' src={image ? `https://strapi.cleverland.by${image.url}` : bookCat} alt='bookImg' />
+        <img
+          className='book-column__img-b'
+          src={image ? `https://strapi.cleverland.by${image.url}` : bookCat}
+          alt='bookImg'
+        />
       </div>
 
       {rating ? (
@@ -30,7 +33,9 @@ export const BookColumnComponent: React.FC<IBoooksingle> = ({ authors, title, ra
       ) : (
         <span className='book-column__no-coment'>ещё нет оценок</span>
       )}
-      <span className='book-column__title'>{title}</span>
+      <span className='book-container__span'>
+        <span className='book-column__title'>{title}</span>
+      </span>
       <span className='book-column__author'>{authors}</span>
       <button onClick={stopClick} className='book-column__btn book-column__btn-1' type='button'>
         Забронирована

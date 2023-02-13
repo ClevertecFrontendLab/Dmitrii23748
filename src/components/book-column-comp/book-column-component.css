@@ -28,12 +28,21 @@
   color: #a7a7a7;
 }
 
+.book-column__img-b {
+    height: 242px;
+}
+
 .book-column__title {
   font-weight: 600;
   font-size: 14px;
   line-height: 18px;
   letter-spacing: 0.1px;
   color: #363636;
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .book-column__author {
