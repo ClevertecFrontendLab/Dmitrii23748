@@ -83,3 +83,52 @@ export interface IControl {
     loadingCategory: boolean;
     error: string | null;
   }
+
+//   export interface ISingleBook {
+//     id: number;
+//     title: string;
+//     rating: number;
+//     issueYear: string;
+//     description: string;
+//     publish: string;
+//     pages: string;
+//     cover: string;
+//     weight: string;
+//     format: string;
+//     ISBN: string;
+//     producer: string;
+//     authors: string[];
+//     images: object[];
+//     categories: string[];
+//     comments?: [
+//         {
+//             id: number;
+//             rating: number;
+//             text: string;
+//             createdAt: string;
+//             user: {
+//                 commentUserId: number;
+//                 firstName: string;
+//                 lastName: string;
+//                 avatarUrl: null
+//             }
+//         }
+//     ] | null;
+//     booking: {
+//         id: number;
+//         order: boolean;
+//         dateOrder: string;
+//         customerId: number;
+//         customerFirstName: string;
+//         customerLastName: string;
+//     } | null;
+//     delivery?: null;
+//     histories?: null;
+//   }
+
+//   export interface ISingleBookState {
+//     bookSingle: ISingleBook;
+//     loadingBoookSingle: boolean;
+//     error: string | null;
+//   }
+

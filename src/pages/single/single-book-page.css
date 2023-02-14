@@ -1,5 +1,5 @@
 .single-book {
-    position: relative;
+  position: relative;
   margin-top: 46px;
   margin-bottom: 46px;
 }
@@ -40,7 +40,7 @@
 }
 
 .single-book__main {
-  margin-bottom: 180px;
+  margin-bottom: 90px;
   display: grid;
   grid-template-columns: 445px 1fr;
   grid-column-gap: 30px;
@@ -164,6 +164,13 @@
   font-weight: 700;
   font-size: 18px;
   line-height: 28px;
+  letter-spacing: 0.1px;
+  color: #363636;
+}
+.single-book__star-rating-text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
   letter-spacing: 0.1px;
   color: #363636;
 }
@@ -336,7 +343,6 @@
 .reviews-line::after {
   display: none;
 }
-
 
 @media (max-width: 880px) {
   .single-book__main-img {

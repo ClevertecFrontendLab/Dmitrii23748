@@ -17,7 +17,7 @@ export const BookColumnComponent: React.FC<IBoooksingle> = ({ authors, title, ra
       <div className='book-column__img-block-b'>
         <img
           className='book-column__img-b'
-          src={image ? `https://strapi.cleverland.by${image.url}` : bookCat}
+          src={ image ? `https://strapi.cleverland.by${image.url}` : bookCat}
           alt='bookImg'
         />
       </div>

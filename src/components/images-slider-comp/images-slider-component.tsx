@@ -29,9 +29,10 @@ export const ImagesSliderComponent: React.FC<IImgSlider> = ({ imagesSliderArr })
         pagination={{ clickable: true }}
         className='img-slider__big'
       >
-        {imagesSliderArr?.map((slide, index) => (
-          <SwiperSlide key={index}>
-            <img className='img-slider__big-slide' src={slide} alt='slider-img single-book_768' />
+        {imagesSliderArr?.map((slide:any,index) => (
+
+          <SwiperSlide key={`big${slide}${index}`}>
+            <img className='img-slider__big-slide' src={`https://strapi.cleverland.by${slide.url}`} alt='slider-img single-book_768' />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -44,9 +45,9 @@ export const ImagesSliderComponent: React.FC<IImgSlider> = ({ imagesSliderArr })
           slidesPerView={3}
           className='img-slider__small'
         >
-          {imagesSliderArr?.map((slide, index) => (
-            <SwiperSlide key={index}>
-              <img className='img-slider__small-slide' src={slide} alt='slider-img' />
+          {imagesSliderArr?.map((slide:any,index) => (
+            <SwiperSlide key={`small${slide}${index}`}>
+              <img className='img-slider__small-slide' src={`https://strapi.cleverland.by${slide.url}`} alt='slider-img' />
             </SwiperSlide>
           ))}
         </Swiper>
