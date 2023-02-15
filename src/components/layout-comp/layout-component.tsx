@@ -1,3 +1,6 @@
+/* eslint-disable react/jsx-no-undef */
+/* eslint-disable no-negated-condition */
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { IBurger } from '../../utils/type';
@@ -7,15 +10,15 @@ import { HeaderComponent } from '../header-comp';
 import './layout-component.css';
 
 export const Layout: React.FC<IBurger> = ({ toggleBurger, closeBurger, burger, addArrowOrange, removeArrowOrange }) => (
-  <div className='layout'>
-    <HeaderComponent
-      toggleBurger={toggleBurger}
-      burger={burger}
-      addArrowOrange={addArrowOrange}
-      closeBurger={closeBurger}
-      removeArrowOrange={removeArrowOrange}
-    />
-    <Outlet />
-    <FooterComponent toggleBurger={toggleBurger} closeBurger={closeBurger} />
-  </div>
-);
+    <div className='layout'>
+      <HeaderComponent
+        toggleBurger={toggleBurger}
+        burger={burger}
+        addArrowOrange={addArrowOrange}
+        closeBurger={closeBurger}
+        removeArrowOrange={removeArrowOrange}
+      />
+      <Outlet />
+      <FooterComponent toggleBurger={toggleBurger} closeBurger={closeBurger} />
+    </div>
+  );

@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable no-negated-condition */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
@@ -17,8 +18,8 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
   const [widthScreen, setWidth] = useState(window.innerWidth);
 
   const dispatch = useAppDispatch();
-  const { category, loadingCategory } = useAppSelector((state) => state.categoryRed);
-  const { loadingBoook } = useAppSelector((state) => state.booksRed);
+  const { category, loadingCategory, error } = useAppSelector((state) => state.categoryRed);
+  const { loadingBoook, errorBook } = useAppSelector((state) => state.booksRed);
 
   const addColor = () => {
     setColor(true);
@@ -107,36 +108,35 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
             </svg>
           </button>
         </NavLink>
-
-        <ul className={hideBooks ? 'navigation-book__list' : 'books-none'} data-test-id='burger-navigation'>
-          {!loadingCategory && !loadingBoook? (
-            category &&
-            category.map((item) => (
-              <li
-                key={item.id}
-                className='navigation-book__item'
-                data-test-id={widthScreen > 769 ? 'navigation-books' : 'burger-books'}
-              >
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive ? 'active-main-link link-book' : 'navigation-book__link link-book'
-                  }
-                  to={`book/${item.path}`}
-                  onClick={() => {
-                    addColor();
-                    closeBurger();
-                  }}
-                  data-test-id='burger-books'
-                >
-                  {item.name}
-                </NavLink>
-                <span className='count-book'>10</span>
-              </li>
-            ))
-          ) : (
-            <h1>Загрузка</h1>
-          )}
-        </ul>
+        {errorBook === 'error' || error === 'error' ? null : (
+          <ul className={hideBooks ? 'navigation-book__list' : 'books-none'} data-test-id='burger-navigation'>
+            {!loadingCategory && !loadingBoook
+              ? category &&
+                category.map((item) => (
+                  <li
+                    key={item.id}
+                    className='navigation-book__item'
+                    data-test-id={widthScreen > 769 ? 'navigation-books' : 'burger-books'}
+                  >
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive ? 'active-main-link link-book' : 'navigation-book__link link-book'
+                      }
+                      to={`books/${item.path}`}
+                      onClick={() => {
+                        addColor();
+                        closeBurger();
+                      }}
+                      data-test-id='burger-books'
+                    >
+                      {item.name}
+                    </NavLink>
+                    <span className='count-book'>10</span>
+                  </li>
+                ))
+              : null}
+          </ul>
+        )}
       </nav>
       <nav className='main-block__navigation-page'>
         <ul className='navigation-page__list'>

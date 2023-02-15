@@ -1,3 +1,4 @@
+/* eslint-disable no-negated-condition */
 import { useState } from 'react';
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 
@@ -53,13 +54,13 @@ export const App = () => {
               />
             }
           >
-            <Route path='/' element={<Navigate to='/book/all' />} />
-            <Route path='/book/:namecategory' element={<MainPage  closeBurger={closeBurger}/>} />
+            <Route path='/' element={<Navigate to='/books/all' />} />
+            <Route path='/books/:namecategory' element={<MainPage closeBurger={closeBurger} />} />
             <Route path='/rules' element={<RulesPage closeBurger={closeBurger} />} />
-            <Route path='/dogovor' element={<DogovorPage closeBurger={closeBurger}/>} />
+            <Route path='/dogovor' element={<DogovorPage closeBurger={closeBurger} />} />
           </Route>
           <Route
-            path='/book/:namecategory/:idbook'
+            path='/books/:namecategory/:idbook'
             element={<SingleBookPage closeBurger={closeBurger} burger={burger} removeArrowOrange={removeArrowOrange} />}
           />
         </Route>

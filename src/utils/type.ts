@@ -69,7 +69,7 @@ export interface IControl {
   export interface IBoooks {
     books: IBoooksingle[];
     loadingBoook: boolean;
-    error: string | null;
+    errorBook: string | null;
   }
 
   export interface ICategory {
