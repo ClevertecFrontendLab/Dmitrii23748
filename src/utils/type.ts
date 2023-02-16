@@ -1,13 +1,3 @@
-export interface IBooks {
-    id: number;
-    title: string;
-    nameBtn: string;
-    imgSrc: boolean;
-    author: string;
-    statusBtn: string;
-    statusStar: boolean;
-    imagesSlider?: string[]
-}
 
 export interface IArrRoutes {
     id: number;
@@ -20,11 +10,6 @@ export interface IControl {
     togleBgColor: () => void;
     bgColor: boolean;
   }
-
-//   export interface IBookswrapper {
-
-//     closeBurger: () => void
-//   }
 
   export interface IBurger {
     toggleBurger?: () => void;
@@ -47,16 +32,13 @@ export interface IControl {
     imagesSliderArr?: string[]
   }
 
-
-
-/// ///////////////////////
   export interface IBookcateg {
     id: number;
     userId: number;
   }
   export interface IBoooksingle {
     issueYear: string;
-    rating: string;
+    rating: number;
     title: string;
     authors: string[];
     image: { url: string };

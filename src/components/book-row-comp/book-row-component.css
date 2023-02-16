@@ -11,6 +11,9 @@
   height: 170px;
   object-fit: contain;
 }
+.stars {
+    height: 20px;
+}
 
 .book-row__img {
   margin-right: 10px;

@@ -1,7 +1,6 @@
 import catImg from '../../assets/images/book/img-cat-small.png';
-import star from '../../assets/images/book/star.png';
-import starGold from '../../assets/images/book/star-gold.png';
 import { IBoooksingle } from '../../utils/type';
+import { StarsComponent } from '../stars-comp/stars-component';
 
 import './book-row-component.css';
 
@@ -9,6 +8,7 @@ export const BookRowComponent: React.FC<IBoooksingle> = ({ authors, title, ratin
   const stopClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
   };
+  const numStar = rating && Math.floor(rating);
 
   return (
     <div className='book-row'>
@@ -22,11 +22,7 @@ export const BookRowComponent: React.FC<IBoooksingle> = ({ authors, title, ratin
         <div className='book-row__stars-btn'>
           {rating ? (
             <div className='stars'>
-              <img className='star-gold' src={starGold} alt='star' />
-              <img className='star-gold' src={starGold} alt='star' />
-              <img className='star-gold' src={starGold} alt='star' />
-              <img className='star-gold' src={starGold} alt='star' />
-              <img className='star-gold' src={star} alt='star' />
+              <StarsComponent ratingNum={numStar}/>
             </div>
           ) : (
             <span className='no-comment'>ещё нет оценок</span>
