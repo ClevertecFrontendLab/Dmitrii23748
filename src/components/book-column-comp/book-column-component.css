@@ -1,0 +1,104 @@
+.book-column {
+  width: 190px;
+  height: 470px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0px 2px 4px rgba(191, 196, 201, 0.2), 0px 3px 4px rgba(191, 196, 201, 0.18),
+    0px 1px 5px rgba(191, 196, 201, 0.24);
+  border-radius: 10px;
+  padding: 8px 8px 16px;
+}
+
+.book-column__stars {
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+}
+
+.book-column__star {
+  margin-right: 10px;
+}
+
+.book-column__no-coment {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  color: #a7a7a7;
+}
+
+.book-column__img-b {
+    height: 242px;
+}
+
+.book-column__title {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  color: #363636;
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.book-column__author {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  color: #727272;
+}
+.book-column__btn {
+  background: linear-gradient(231.58deg, #f83600 -53.35%, #f9d423 297.76%);
+  border-radius: 20px;
+  padding: 11px 27px;
+  border: none;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: #fff;
+}
+.book-column__btn-1:hover {
+  box-shadow: 0px 2px 5px rgba(54, 54, 54, 0.1);
+}
+.book-column__btn:active {
+  box-shadow: 0px 3px 4px rgba(222, 125, 11, 0.2), 0px 1px 10px rgba(249, 89, 8, 0.2);
+}
+.book-column__btn-2 {
+  background: transparent;
+  color: #363636;
+  border: 1px solid #bfc4c9;
+}
+
+.book-column__btn-3 {
+  color: #a7a7a7;
+  border: 1px solid #bfc4c9;
+  background: transparent;
+}
+
+
+
+@media (max-width: 320px) {
+    .book-column {
+      width: 288px;
+    }
+    .book-column__img-block-b {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .book-column__img-b {
+        max-width: 174px;
+    }
+    .book-column__btn {
+        width: 256px;
+    }
+  }
+

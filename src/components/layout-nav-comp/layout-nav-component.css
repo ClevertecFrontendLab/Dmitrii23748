@@ -1,0 +1,32 @@
+.layout-nav {
+  flex: 1 0 auto;
+  margin-top: 62px;
+  margin-bottom: 62px;
+}
+
+.aside__block {
+  display: flex;
+}
+
+@media (max-width: 960px) {
+  .books-flex {
+    column-gap: 15px;
+  }
+  .layout-nav {
+    margin-top: 44px;
+  }
+  .menu-burger__line {
+    width: 100%;
+    height: 2px;
+    background: #000;
+  }
+
+}
+
+
+@media (max-width: 320px) {
+    .layout-nav {
+      margin-top: 16px;
+    }
+  }
+

@@ -1,0 +1,137 @@
+.control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.control-search__block {
+  display: flex;
+  align-items: center;
+}
+
+.search-block {
+  position: relative;
+  margin-right: 16px;
+}
+.search-img {
+  position: absolute;
+  top: 10px;
+  left: 14px;
+}
+
+.control__search {
+  width: 350px;
+  box-shadow: 0px 2px 4px rgba(191, 196, 201, 0.2), 0px 3px 4px rgba(191, 196, 201, 0.18),
+    0px 1px 5px rgba(191, 196, 201, 0.24);
+  border-radius: 599px;
+  padding: 10px 10px 10px 40px;
+  border: none;
+  outline: none;
+}
+.control__search::placeholder {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  color: #a7a7a7;
+}
+
+.select-block {
+  position: relative;
+  margin-right: 20px;
+}
+
+.select-img {
+  position: absolute;
+  top: 10px;
+  left: 14px;
+  cursor: pointer;
+}
+
+.control__btn-select {
+  display: block;
+  padding: 8px 16px 8px 38px;
+  box-shadow: 0px 2px 4px rgba(191, 196, 201, 0.2), 0px 3px 4px rgba(191, 196, 201, 0.18),
+    0px 1px 5px rgba(191, 196, 201, 0.24);
+  border-radius: 599px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  color: #a7a7a7;
+  cursor: pointer;
+}
+
+.control__btn-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.control__btn-column,
+.control__btn-list {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  border: none;
+  background-color: #fff;
+  filter: drop-shadow(0px 2px 4px rgba(191, 196, 201, 0.2)) drop-shadow(0px 3px 4px rgba(191, 196, 201, 0.18))
+    drop-shadow(0px 1px 5px rgba(191, 196, 201, 0.24));
+  cursor: pointer;
+}
+
+.control__btn-list {
+  margin-left: 16px;
+}
+
+.btn-bg-control {
+  background: linear-gradient(231.58deg, #f83600 -53.35%, #f9d423 297.76%);
+}
+
+.search-block__small,
+.select-block__small {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .control__search {
+    width: 274px;
+  }
+}
+
+@media (max-width: 570px) {
+  .search-block,
+  .select-block {
+    display: none;
+  }
+  .search-block__small,
+  .select-block__small {
+    display: block;
+  }
+
+  .search-block__small {
+    width: 42px;
+    height: 42px;
+  }
+  .search-btn__small {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 320px) {
+  .control__btn-list,
+  .control__btn-column {
+    width: 32px;
+    height: 32px;
+  }
+
+  .control {
+    margin-bottom: 12px;
+  }
+}
