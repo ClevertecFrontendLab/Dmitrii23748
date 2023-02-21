@@ -11,6 +11,7 @@ import { IBoooks, IBoooksingle } from '../../utils/type';
 
 const initialState: IBoooks = {
   books: [],
+  booksFilter: [],
   loadingBoook: false,
   errorBook: null,
 };
@@ -28,7 +29,16 @@ export const getBooks = createAsyncThunk<IBoooksingle[]>('books/getBooks', async
 export const booksSlice = createSlice({
   name: 'books',
   initialState,
-  reducers: {},
+  reducers: {
+    filteredBook: (state, action) => {
+      state.books = state.booksFilter.filter((book) =>
+        book.categories[0].toLowerCase().includes(action.payload.toLowerCase())
+      );
+    },
+    allBook:(state, action) => {
+        state.books = [...action.payload];
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getBooks.pending, (state) => {
@@ -38,6 +48,7 @@ export const booksSlice = createSlice({
       .addCase(getBooks.fulfilled, (state, action) => {
         state.books = action.payload;
         state.loadingBoook = false;
+        state.booksFilter = action.payload;
       })
       .addMatcher(isError, (state) => {
         state.errorBook = 'error';
@@ -46,6 +57,7 @@ export const booksSlice = createSlice({
   },
 });
 
+export const { filteredBook, allBook } = booksSlice.actions;
 export default booksSlice.reducer;
 
 function isError(action: AnyAction) {

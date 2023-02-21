@@ -1,12 +1,15 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable array-callback-return */
 /* eslint-disable no-negated-condition */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
 import { getBookSingle } from '../../features/book-single/bookSingleSlice';
-import {useAppDispatch, useAppSelector } from '../../hook';
+import { useAppDispatch, useAppSelector } from '../../hook';
 import { IBurger } from '../../utils/type';
 import { BookColumnComponent } from '../book-column-comp';
 import { BookRowComponent } from '../book-row-comp';
@@ -16,20 +19,37 @@ import { LoadComponent } from '../load-comp';
 import './books-component.css';
 
 export const BooksComponent: React.FC<IBurger> = ({ bgColor, closeBurger }) => {
-    const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
+  const { namecategory } = useParams();
   const { books, loadingBoook, errorBook } = useAppSelector((state) => state.booksRed);
-  const { loadingCategory, error } = useAppSelector((state) => state.categoryRed);
+  const { category, loadingCategory, error } = useAppSelector((state) => state.categoryRed);
 
+  const [stateBooks, setStateBooks] = useState([...books]);
 
+  const filterssddfwsa = () => {
+    const sdgsg = category.filter((item) => item.path.toLowerCase().includes(namecategory!.toLowerCase()));
 
+    const sfsafs = books.filter((item) => item.categories[0].toLowerCase().includes(sdgsg[0].name.toLowerCase()));
+
+    setStateBooks(sfsafs);
+  };
+
+  useEffect(() => {
+    setStateBooks([...books]);
+
+    if (namecategory !== 'all') {
+      filterssddfwsa();
+    }
+  }, [books,namecategory]);
 
   return (
     <React.Fragment>
-      {errorBook === 'error' || error === 'error' ? <ErrorComponent/> : null}
+      {errorBook === 'error' || error === 'error' ? <ErrorComponent /> : null}
 
       <ul className={bgColor ? 'books' : 'books-flex'} onClick={closeBurger}>
         {!loadingBoook && !loadingCategory ? (
-          books.map((item) => (
+          stateBooks &&
+          stateBooks.map((item) => (
             <li className={bgColor ? 'book-row__comp' : 'book'} key={item.id}>
               <Link className='single-book' to={`${item.id}`} onClick={() => dispatch(getBookSingle(item.id))}>
                 {bgColor ? <BookRowComponent {...item} /> : <BookColumnComponent {...item} />}

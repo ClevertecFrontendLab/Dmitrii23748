@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import arrow from '../../assets/images/arrow/arrow-reviews.svg';
 import avatar from '../../assets/images/single/avatar-small.png';
@@ -21,7 +21,8 @@ import { useResize } from '../../utils/useResize';
 import './single-book-page.css';
 
 export const SingleBookPage: React.FC<IBurger> = ({ closeBurger, burger, removeArrowOrange }) => {
-  const { idbook } = useParams();
+  const { idbook, namecategory } = useParams();
+
   const { widthRes } = useResize();
 
   const [reviews, setReviews] = useState(true);
@@ -61,11 +62,11 @@ export const SingleBookPage: React.FC<IBurger> = ({ closeBurger, burger, removeA
             <div className='single-book__breadpoint'>
               <div className='container'>
                 <div className='breadpoint-text__flex'>
-                  <span className='breadpoint-text breadpoint-text__elem'>
+                  <Link to={`/books/${namecategory}`} className='breadpoint-text breadpoint-text__elem'>
                     {bookSingle.categories && bookSingle.categories.length > 0
                       ? bookSingle.categories[0]
-                      : 'Бизнес книги'}
-                  </span>
+                      : 'все книги'}
+                  </Link>
                   <span className='breadpoint-text'>{bookSingle.title}</span>
                 </div>
               </div>

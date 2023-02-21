@@ -50,6 +50,7 @@ export interface IControl {
   }
   export interface IBoooks {
     books: IBoooksingle[];
+    booksFilter: IBoooksingle[];
     loadingBoook: boolean;
     errorBook: string | null;
   }

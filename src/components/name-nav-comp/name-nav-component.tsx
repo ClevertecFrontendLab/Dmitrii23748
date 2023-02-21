@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable complexity */
 /* eslint-disable no-negated-condition */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -6,6 +7,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
+import { allBook, filteredBook } from '../../features/books/booksSlice';
 import { getCategory } from '../../features/category/categorySlice';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import { IBurger } from '../../utils/type';
@@ -19,7 +21,7 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
 
   const dispatch = useAppDispatch();
   const { category, loadingCategory, error } = useAppSelector((state) => state.categoryRed);
-  const { loadingBoook, errorBook } = useAppSelector((state) => state.booksRed);
+  const { booksFilter,loadingBoook, errorBook } = useAppSelector((state) => state.booksRed);
 
   const addColor = () => {
     setColor(true);
@@ -38,6 +40,12 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
     setHideBooks(false);
   };
 
+  const filtersBookNameCategory = (category: string) => {
+    dispatch(filteredBook(category))
+  }
+
+
+
   useEffect(() => {
     const lastNameUrl = window.location.href.split('/')[window.location.href.split('/').length - 1];
 
@@ -53,6 +61,7 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
   useEffect(() => {
     dispatch(getCategory());
   }, [dispatch]);
+
 
   return (
     <aside
@@ -110,6 +119,24 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
         </NavLink>
         {errorBook === 'error' || error === 'error' ? null : (
           <ul className={hideBooks ? 'navigation-book__list' : 'books-none'} data-test-id='burger-navigation'>
+            <li
+              className='navigation-book__item'
+              data-test-id={widthScreen > 769 ? 'navigation-books' : 'burger-books'}
+            >
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? 'active-main-link link-book navigation-title__link' : 'navigation-book__link link-book'
+                }
+                to='books/all'
+                onClick={() => {
+                  addColor();
+                  closeBurger();
+                  dispatch(allBook(booksFilter))
+                }}
+              >
+                Все книги
+              </NavLink>
+            </li>
             {!loadingCategory && !loadingBoook
               ? category &&
                 category.map((item) => (
@@ -126,6 +153,7 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
                       onClick={() => {
                         addColor();
                         closeBurger();
+                        filtersBookNameCategory(item.name)
                       }}
                       data-test-id='burger-books'
                     >

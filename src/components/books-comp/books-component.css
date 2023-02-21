@@ -6,6 +6,10 @@
     row-gap: 24px;
 }
 
+.book {
+    margin-right: 15px;
+}
+
 .book-row__comp {
     margin-bottom: 10px;
 }
