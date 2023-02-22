@@ -63,9 +63,9 @@ export const SingleBookPage: React.FC<IBurger> = ({ closeBurger, burger, removeA
               <div className='container'>
                 <div className='breadpoint-text__flex'>
                   <Link to={`/books/${namecategory}`} className='breadpoint-text breadpoint-text__elem'>
-                    {bookSingle.categories && bookSingle.categories.length > 0
+                    {bookSingle.categories && bookSingle.categories.length > 0 && namecategory !== 'all'
                       ? bookSingle.categories[0]
-                      : 'все книги'}
+                      : 'Все книги'}
                   </Link>
                   <span className='breadpoint-text'>{bookSingle.title}</span>
                 </div>

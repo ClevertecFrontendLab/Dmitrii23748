@@ -40,7 +40,7 @@ export const BooksComponent: React.FC<IBurger> = ({ bgColor, closeBurger }) => {
     if (namecategory !== 'all') {
       filterssddfwsa();
     }
-  }, [books,namecategory]);
+  }, [books, namecategory]);
 
   return (
     <React.Fragment>
@@ -59,6 +59,11 @@ export const BooksComponent: React.FC<IBurger> = ({ bgColor, closeBurger }) => {
         ) : (
           <LoadComponent />
         )}
+        {stateBooks.length === 0 ? (
+          <div className='blocks-book__no-category'>
+            <span className='text__no-category'>В этой категории книг ещё нет</span>
+         </div>
+        ) : null}
       </ul>
     </React.Fragment>
   );

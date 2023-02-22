@@ -35,6 +35,11 @@ export const booksSlice = createSlice({
         book.categories[0].toLowerCase().includes(action.payload.toLowerCase())
       );
     },
+    filteredBookSearch: (state, action) => {
+        state.books = state.booksFilter.filter((book) =>
+          book.title.toLowerCase().includes(action.payload.toLowerCase())
+        );
+      },
     allBook:(state, action) => {
         state.books = [...action.payload];
     }
@@ -57,7 +62,7 @@ export const booksSlice = createSlice({
   },
 });
 
-export const { filteredBook, allBook } = booksSlice.actions;
+export const { filteredBook,filteredBookSearch, allBook } = booksSlice.actions;
 export default booksSlice.reducer;
 
 function isError(action: AnyAction) {

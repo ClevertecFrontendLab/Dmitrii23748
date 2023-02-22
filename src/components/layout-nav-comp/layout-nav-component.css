@@ -20,6 +20,9 @@
     height: 2px;
     background: #000;
   }
+  .aside__block {
+    display: block;
+  }
 
 }
 

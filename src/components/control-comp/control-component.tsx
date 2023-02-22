@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import column from '../../assets/images/control/column-control.svg';
 import columnWhite from '../../assets/images/control/column-control-white.svg';
@@ -8,27 +8,43 @@ import listWhite from '../../assets/images/control/list-control-white.svg';
 import search from '../../assets/images/control/search-control.svg';
 import searchSmall from '../../assets/images/control/search-small.svg';
 import select from '../../assets/images/control/select-control.svg';
+import { filteredBookSearch } from '../../features/books/booksSlice';
+import { useAppDispatch } from '../../hook';
 import { IControl } from '../../utils/type';
 import { SearchAdaptiveComponent } from '../search-adaptive-comp';
 
 import './control-component.css';
 
 export const ControlComponent: React.FC<IControl> = ({ bgColor, togleBgColor }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const dispatch = useAppDispatch();
   const [searchInput, setSearchInput] = useState(false);
 
   const toggleSearch = () => {
     setSearchInput(!searchInput);
   };
 
+  const filteredSearch = () => {
+    dispatch(filteredBookSearch(inputRef.current?.value));
+   }
+
   return (
     <div className='control'>
       {searchInput ? (
-        <SearchAdaptiveComponent toggleSearch={toggleSearch}/>
+        <SearchAdaptiveComponent toggleSearch={toggleSearch} />
       ) : (
         <React.Fragment>
           <div className='control-search__block'>
+
             <div className='search-block'>
-              <input className='control__search' type='text' placeholder='Поиск книги или автора…' data-test-id='input-search'/>
+              <input
+                className='control__search'
+                type='text'
+                placeholder='Поиск книги или автора…'
+                data-test-id='input-search'
+                ref={inputRef}
+                onChange={filteredSearch}
+              />
               <img className='search-img' src={search} alt='search' />
             </div>
 
@@ -42,9 +58,6 @@ export const ControlComponent: React.FC<IControl> = ({ bgColor, togleBgColor }) 
                 />
               </button>
             </div>
-
-            {/* {searchInput ? <SearchAdaptiveComponent toggleSearch={toggleSearch} /> : null} */}
-
             <div className='select-block'>
               <span className='control__btn-select'>По рейтингу</span>
               <img className='select-img' src={select} alt='select' />
