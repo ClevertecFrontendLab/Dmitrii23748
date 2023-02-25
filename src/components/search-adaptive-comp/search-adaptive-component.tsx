@@ -23,7 +23,7 @@ export const SearchAdaptiveComponent: React.FC<ISearch> = ({ toggleSearch }) => 
   };
 
   useEffect(() => {
-    inputRef.current!.value = localStorage.getItem('search')!;
+    inputRef.current!.value =  localStorage.getItem('search')!;
     if (inputRef.current) {
       inputRef.current.focus();
     }
