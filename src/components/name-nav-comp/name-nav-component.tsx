@@ -46,7 +46,6 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
     setColor(false);
     localStorage.removeItem('flag');
   };
-
   const hideBooksBlock = () => {
     setHideBooks(!hideBooks);
   };
