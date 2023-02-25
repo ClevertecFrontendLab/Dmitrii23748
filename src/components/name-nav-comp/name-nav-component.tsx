@@ -52,7 +52,6 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
   const addHideBooksBlock = () => {
     setHideBooks(false);
   };
-
   const filtersBookNameCategory = (category: string) => {
     dispatch(filteredBook(category));
     dispatch(filteredBookSearch(localStorage.getItem('search')));
