@@ -42,7 +42,6 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
   const addColor = () => {
     setColor(true);
   };
-
   const removeColor = () => {
     setColor(false);
     localStorage.removeItem('flag');
