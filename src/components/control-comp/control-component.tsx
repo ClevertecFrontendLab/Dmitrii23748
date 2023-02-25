@@ -92,7 +92,6 @@ export const ControlComponent: React.FC<IControl> = ({ bgColor, togleBgColor }) 
               <span className='control__btn-select'>По рейтингу</span>
               <img className='select-img' src={sort === 'down' ? select : selectUp} alt='select' />
             </div>
-
             <div className='select-block__small'>
               <img className='select-small__img' src={selectSmall} alt='selectSmall' />
             </div>
