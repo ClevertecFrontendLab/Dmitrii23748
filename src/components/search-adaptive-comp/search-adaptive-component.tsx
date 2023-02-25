@@ -11,11 +11,10 @@ import { ISearch } from '../../utils/type';
 
 import './search-adaptive-component.css';
 
-export const SearchAdaptiveComponent: React.FC<ISearch> = ({ toggleSearch}) => {
+export const SearchAdaptiveComponent: React.FC<ISearch> = ({ toggleSearch }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
   const [stateSearch, setStateSearch] = useState(true);
-
 
   const filteredSearch = () => {
     dispatch(filteredBookSearch(inputRef.current?.value));
@@ -23,17 +22,12 @@ export const SearchAdaptiveComponent: React.FC<ISearch> = ({ toggleSearch}) => {
     localStorage.setItem('searchFlag', 'true');
   };
 
-
-
   useEffect(() => {
-    if (localStorage.getItem('search')) {
-        inputRef.current!.value = localStorage.getItem('search')!;
-      }
+    inputRef.current!.value = localStorage.getItem('search')!;
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, []);
-
 
   return (
     <div className='search-block__adap'>

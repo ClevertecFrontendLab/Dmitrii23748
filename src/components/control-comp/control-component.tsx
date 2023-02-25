@@ -49,15 +49,18 @@ export const ControlComponent: React.FC<IControl> = ({ bgColor, togleBgColor }) 
   };
 
   useEffect(() => {
+    inputRef.current!.value = localStorage.getItem('search')!;
+
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, []);
 
+
   return (
     <div className='control'>
       {searchInput ? (
-        <SearchAdaptiveComponent toggleSearch={toggleSearch}/>
+        <SearchAdaptiveComponent toggleSearch={toggleSearch} />
       ) : (
         <React.Fragment>
           <div className='control-search__block'>
@@ -71,6 +74,7 @@ export const ControlComponent: React.FC<IControl> = ({ bgColor, togleBgColor }) 
                 onChange={filteredSearch}
                 onFocus={() => setStateSearch(true)}
                 onBlur={() => setStateSearch(false)}
+                value={localStorage.getItem('search')!}
               />
 
               <img className='search-img' src={stateSearch ? searchOrange : search} alt='search' />
@@ -86,7 +90,7 @@ export const ControlComponent: React.FC<IControl> = ({ bgColor, togleBgColor }) 
                 />
               </button>
             </div>
-            <div className='select-block' onClick={sortedBooks} data-test-id="sort-rating-button">
+            <div className='select-block' onClick={sortedBooks} data-test-id='sort-rating-button'>
               <span className='control__btn-select'>По рейтингу</span>
               <img className='select-img' src={sort === 'down' ? select : selectUp} alt='select' />
             </div>
