@@ -74,7 +74,6 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
 
     return count;
   };
-
   const clickDogovorRules = () => {
     addHideBooksBlock();
     removeColor();
