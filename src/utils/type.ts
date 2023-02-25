@@ -26,6 +26,7 @@ export interface IControl {
 
   export interface ISearch {
     toggleSearch: () => void;
+    searchInput?: boolean
   }
 
   export interface IImgSlider {
@@ -53,12 +54,14 @@ export interface IControl {
     booksFilter: IBoooksingle[];
     loadingBoook: boolean;
     errorBook: string | null;
+    sort: string;
   }
 
   export interface ICategory {
     name: string;
     path: string;
     id: number;
+    count?:number | string;
   }
 
   export interface ICategorys {

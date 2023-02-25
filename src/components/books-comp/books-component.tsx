@@ -59,10 +59,17 @@ export const BooksComponent: React.FC<IBurger> = ({ bgColor, closeBurger }) => {
         ) : (
           <LoadComponent />
         )}
-        {stateBooks.length === 0 ? (
+        {stateBooks.length === 0 &&
+        localStorage.getItem('searchFlag') === 'true' ? (
           <div className='blocks-book__no-category'>
-            <span className='text__no-category'>В этой категории книг ещё нет</span>
-         </div>
+            <span className='text__no-category'  data-test-id="search-result-not-found">По запросу ничего не найдено</span>
+          </div>
+        ) : null}
+        {stateBooks.length === 0 &&
+        localStorage.getItem('searchFlag') === 'false' ? (
+          <div className='blocks-book__no-category'>
+            <span className='text__no-category'  data-test-id="empty-category">В этой категории книг ещё нет</span>
+          </div>
         ) : null}
       </ul>
     </React.Fragment>

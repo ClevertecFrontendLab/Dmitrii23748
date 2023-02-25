@@ -90,6 +90,11 @@ select {
     width: 822px;
 }
 
+.higlight {
+    color: rgb(255,82,83);
+}
+
+
 @media (max-width: 990px) {
     .main-block__books {
         width: 100%;

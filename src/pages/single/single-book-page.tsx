@@ -62,12 +62,16 @@ export const SingleBookPage: React.FC<IBurger> = ({ closeBurger, burger, removeA
             <div className='single-book__breadpoint'>
               <div className='container'>
                 <div className='breadpoint-text__flex'>
-                  <Link to={`/books/${namecategory}`} className='breadpoint-text breadpoint-text__elem'>
+                  <Link
+                    to={`/books/${namecategory}`}
+                    className='breadpoint-text breadpoint-text__elem'
+                    data-test-id='breadcrumbs-link'
+                  >
                     {bookSingle.categories && bookSingle.categories.length > 0 && namecategory !== 'all'
                       ? bookSingle.categories[0]
                       : 'Все книги'}
                   </Link>
-                  <span className='breadpoint-text'>{bookSingle.title}</span>
+                  <span className='breadpoint-text' data-test-id="book-name">{bookSingle.title}</span>
                 </div>
               </div>
             </div>
@@ -84,7 +88,7 @@ export const SingleBookPage: React.FC<IBurger> = ({ closeBurger, burger, removeA
                       </div>
 
                       <div className='single-book__main-text'>
-                        <h2 className='single-book__main-title'>{bookSingle.title}</h2>
+                        <h2 className='single-book__main-title' data-test-id="book-title">{bookSingle.title}</h2>
                         <p className='single-book__main-author'>
                           {bookSingle.authors}, {bookSingle.issueYear}
                         </p>

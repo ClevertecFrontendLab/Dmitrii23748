@@ -1,3 +1,10 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-console */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-return-assign */
+/* eslint-disable no-sequences */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable complexity */
 /* eslint-disable no-negated-condition */
@@ -7,7 +14,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { allBook, filteredBook } from '../../features/books/booksSlice';
+import { allBook, filteredBook, filteredBookSearch, sortedDown, sortedUp } from '../../features/books/booksSlice';
 import { getCategory } from '../../features/category/categorySlice';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import { IBurger } from '../../utils/type';
@@ -15,13 +22,14 @@ import { IBurger } from '../../utils/type';
 import './name-nav-component.css';
 
 export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idbook, widthScreenRes }) => {
+  const dispatch = useAppDispatch();
+  const { category, loadingCategory, error } = useAppSelector((state) => state.categoryRed);
+  const { booksFilter, loadingBoook, errorBook, sort, books } = useAppSelector((state) => state.booksRed);
+
   const [color, setColor] = useState(true);
   const [hideBooks, setHideBooks] = useState(true);
   const [widthScreen, setWidth] = useState(window.innerWidth);
-
-  const dispatch = useAppDispatch();
-  const { category, loadingCategory, error } = useAppSelector((state) => state.categoryRed);
-  const { booksFilter,loadingBoook, errorBook } = useAppSelector((state) => state.booksRed);
+  const [countCategory, setCountCategory] = useState([...category]);
 
   const addColor = () => {
     setColor(true);
@@ -41,10 +49,29 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
   };
 
   const filtersBookNameCategory = (category: string) => {
-    dispatch(filteredBook(category))
-  }
+    dispatch(filteredBook(category));
+    dispatch(filteredBookSearch(localStorage.getItem('search')));
+  };
 
+  const sortedBooks = () => {
+    if (sort === 'up') {
+      dispatch(sortedDown());
+    } else if (sort === 'down') {
+      dispatch(sortedUp());
+    }
+  };
 
+  const countArrCategory = (name: string) => {
+    let count = 0;
+
+    for (let i = 0; i < booksFilter.length; i += 1) {
+      if (booksFilter[i].categories[0] === name) {
+        count += 1;
+      }
+    }
+
+    return count;
+  };
 
   useEffect(() => {
     const lastNameUrl = window.location.href.split('/')[window.location.href.split('/').length - 1];
@@ -62,6 +89,13 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
     dispatch(getCategory());
   }, [dispatch]);
 
+  useEffect(() => {
+    const copyCategory = [...category];
+
+    const arr = copyCategory.map((obj) => ({ ...obj, count: `${countArrCategory(obj.name)}` }));
+
+    setCountCategory(arr);
+  }, [books]);
 
   return (
     <aside
@@ -131,19 +165,21 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
                 onClick={() => {
                   addColor();
                   closeBurger();
-                  dispatch(allBook(booksFilter))
+                  dispatch(allBook(booksFilter));
+                  dispatch(filteredBookSearch(localStorage.getItem('search')));
+                  sortedBooks();
                 }}
+                // data-test-id={widthScreenRes && widthScreenRes > 960 ? 'navigation-books' : 'burger-books'}
               >
                 Все книги
               </NavLink>
             </li>
             {!loadingCategory && !loadingBoook
-              ? category &&
-                category.map((item) => (
+              ? countCategory &&
+                countCategory.map((item) => (
                   <li
                     key={item.id}
                     className='navigation-book__item'
-                    data-test-id={widthScreen > 769 ? 'navigation-books' : 'burger-books'}
                   >
                     <NavLink
                       className={({ isActive }) =>
@@ -153,13 +189,28 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
                       onClick={() => {
                         addColor();
                         closeBurger();
-                        filtersBookNameCategory(item.name)
+                        filtersBookNameCategory(item.name);
+                        localStorage.setItem('searchFlag', 'false');
+                        sortedBooks();
                       }}
-                      data-test-id='burger-books'
+
+                      //   data-test-id='burger-books'
+                      data-test-id={
+                        widthScreenRes && widthScreenRes > 769 ? `navigation-${item.path}` : `burger-${item.path}`
+                      }
                     >
                       {item.name}
                     </NavLink>
-                    <span className='count-book'>10</span>
+                    <span
+                      className='count-book'
+                      data-test-id={
+                        widthScreenRes && widthScreenRes > 769
+                          ? `navigation-book-count-for-${item.path}`
+                          : `burger-book-count-for-${item.path}`
+                      }
+                    >
+                      {item.count}
+                    </span>
                   </li>
                 ))
               : null}

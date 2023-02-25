@@ -21,7 +21,7 @@ export const HeaderComponent: React.FC<IBurger> = ({
   };
 
   return (
-    <section className='header' onClick={toggleBurger}>
+    <section className='header'>
       <div className='container'>
 
         <nav className='header__nav'>

@@ -28,6 +28,7 @@
   padding: 10px 10px 10px 40px;
   border: none;
   outline: none;
+  caret-color: rgba(248, 54, 0, 1);
 }
 .control__search::placeholder {
   font-weight: 400;
