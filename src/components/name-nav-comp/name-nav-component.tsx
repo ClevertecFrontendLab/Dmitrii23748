@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -12,9 +13,16 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
-import { allBook, filteredBook, filteredBookSearch, sortedDown, sortedUp } from '../../features/books/booksSlice';
+import {
+  allBook,
+  filteredBook,
+  filteredBookSearch,
+  getBooks,
+  sortedDown,
+  sortedUp,
+} from '../../features/books/booksSlice';
 import { getCategory } from '../../features/category/categorySlice';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import { IBurger } from '../../utils/type';
@@ -108,8 +116,8 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
   }, [burger]);
 
   useEffect(() => {
-    dispatch(getCategory());
-  }, [dispatch]);
+    dispatch(getBooks());
+  }, []);
 
   useEffect(() => {
     const copyCategory = [...category];
@@ -134,7 +142,7 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
               ? 'navigation-title active-main-link border-active  aside-link-flex'
               : 'navigation-title__link  aside-link-flex'
           }
-          to='/'
+          to='books/all'
           onClick={() => {
             addColor();
             hideBooksBlock();

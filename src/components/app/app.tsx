@@ -1,7 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-negated-condition */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 
+import { getCategory } from '../../features/category/categorySlice';
+import { useAppDispatch } from '../../hook';
 import { DogovorPage } from '../../pages/dogovor';
 import { MainPage } from '../../pages/main';
 import { RulesPage } from '../../pages/rules';
@@ -10,6 +13,7 @@ import { Layout } from '../layout-comp';
 import { LayoutNavComponent } from '../layout-nav-comp';
 
 export const App = () => {
+  const dispatch = useAppDispatch();
   const [burger, setBurger] = useState(true);
   const [colorArrowOrange, setColorArrowOrange] = useState(true);
 
@@ -27,6 +31,10 @@ export const App = () => {
   const removeArrowOrange = () => {
     setColorArrowOrange(false);
   };
+
+  useEffect(() => {
+    dispatch(getCategory());
+  }, []);
 
   return (
     <HashRouter>

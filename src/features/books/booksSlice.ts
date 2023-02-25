@@ -42,7 +42,6 @@ export const booksSlice = createSlice({
         if(action.payload !== null) {
             state.books = state.booksFilter.filter((book) => book.title.toLowerCase().includes(action.payload.toLowerCase()));
         }
-
     },
     sortedUp: (state) => {
       state.books = state.books.sort((itemA: { rating: number }, itemB: { rating: number }) =>

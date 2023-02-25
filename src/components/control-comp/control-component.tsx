@@ -6,7 +6,6 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import column from '../../assets/images/control/column-control.svg';
 import columnWhite from '../../assets/images/control/column-control-white.svg';
-import selectSmall from '../../assets/images/control/filter-small.svg';
 import list from '../../assets/images/control/list-control.svg';
 import listWhite from '../../assets/images/control/list-control-white.svg';
 import search from '../../assets/images/control/search-control.svg';
@@ -92,8 +91,8 @@ export const ControlComponent: React.FC<IControl> = ({ bgColor, togleBgColor }) 
               <span className='control__btn-select'>По рейтингу</span>
               <img className='select-img' src={sort === 'down' ? select : selectUp} alt='select' />
             </div>
-            <div className='select-block__small'>
-              <img className='select-small__img' src={selectSmall} alt='selectSmall' />
+            <div className='select-block__small' onClick={sortedBooks}>
+              <img className='select-small__img' src={sort === 'down' ? select : selectUp} alt='selectSmall' />
             </div>
           </div>
           <div className='control__btn-block'>
