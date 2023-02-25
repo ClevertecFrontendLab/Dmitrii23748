@@ -56,7 +56,6 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
     dispatch(filteredBook(category));
     dispatch(filteredBookSearch(localStorage.getItem('search')));
   };
-
   const sortedBooks = () => {
     if (sort === 'up') {
       dispatch(sortedUp());
