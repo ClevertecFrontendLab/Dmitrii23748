@@ -1,11 +1,28 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-param-reassign */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-console */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-return-assign */
+/* eslint-disable no-sequences */
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable complexity */
 /* eslint-disable no-negated-condition */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
+import {
+  allBook,
+  filteredBook,
+  filteredBookSearch,
+  getBooks,
+  sortedDown,
+  sortedUp,
+} from '../../features/books/booksSlice';
 import { getCategory } from '../../features/category/categorySlice';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import { IBurger } from '../../utils/type';
@@ -13,29 +30,69 @@ import { IBurger } from '../../utils/type';
 import './name-nav-component.css';
 
 export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idbook, widthScreenRes }) => {
+  const dispatch = useAppDispatch();
+  const { category, loadingCategory, error } = useAppSelector((state) => state.categoryRed);
+  const { booksFilter, loadingBoook, errorBook, sort, books } = useAppSelector((state) => state.booksRed);
+
   const [color, setColor] = useState(true);
   const [hideBooks, setHideBooks] = useState(true);
   const [widthScreen, setWidth] = useState(window.innerWidth);
-
-  const dispatch = useAppDispatch();
-  const { category, loadingCategory, error } = useAppSelector((state) => state.categoryRed);
-  const { loadingBoook, errorBook } = useAppSelector((state) => state.booksRed);
+  const [countCategory, setCountCategory] = useState([...category]);
 
   const addColor = () => {
     setColor(true);
   };
-
   const removeColor = () => {
     setColor(false);
     localStorage.removeItem('flag');
   };
-
   const hideBooksBlock = () => {
     setHideBooks(!hideBooks);
   };
-
   const addHideBooksBlock = () => {
     setHideBooks(false);
+  };
+  const filtersBookNameCategory = (category: string) => {
+    dispatch(filteredBook(category));
+    dispatch(filteredBookSearch(localStorage.getItem('search')));
+  };
+  const sortedBooks = () => {
+    if (sort === 'up') {
+      dispatch(sortedUp());
+    } else if (sort === 'down') {
+      dispatch(sortedDown());
+    }
+  };
+  const countArrCategory = (name: string) => {
+    let count = 0;
+
+    for (let i = 0; i < booksFilter.length; i += 1) {
+      if (booksFilter[i].categories[0] === name) {
+        count += 1;
+      }
+    }
+
+    return count;
+  };
+  const clickDogovorRules = () => {
+    addHideBooksBlock();
+    removeColor();
+    closeBurger();
+  };
+  const clickAllCategory = () => {
+    addColor();
+    closeBurger();
+    dispatch(allBook(booksFilter));
+    dispatch(filteredBookSearch(localStorage.getItem('search')));
+    sortedBooks();
+  };
+
+  const clickCategory = (name: string) => {
+    addColor();
+    closeBurger();
+    filtersBookNameCategory(name);
+    localStorage.setItem('searchFlag', 'false');
+    sortedBooks();
   };
 
   useEffect(() => {
@@ -51,8 +108,16 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
   }, [burger]);
 
   useEffect(() => {
-    dispatch(getCategory());
-  }, [dispatch]);
+    dispatch(getBooks());
+  }, []);
+
+  useEffect(() => {
+    const copyCategory = [...category];
+
+    const arr = copyCategory.map((obj) => ({ ...obj, count: `${countArrCategory(obj.name)}` }));
+
+    setCountCategory(arr);
+  }, [books]);
 
   return (
     <aside
@@ -69,7 +134,7 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
               ? 'navigation-title active-main-link border-active  aside-link-flex'
               : 'navigation-title__link  aside-link-flex'
           }
-          to='/'
+          to='books/all'
           onClick={() => {
             addColor();
             hideBooksBlock();
@@ -110,28 +175,46 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
         </NavLink>
         {errorBook === 'error' || error === 'error' ? null : (
           <ul className={hideBooks ? 'navigation-book__list' : 'books-none'} data-test-id='burger-navigation'>
+            <li
+              className='navigation-book__item'
+              data-test-id={widthScreen > 769 ? 'navigation-books' : 'burger-books'}
+            >
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? 'active-main-link link-book navigation-title__link' : 'navigation-book__link link-book'
+                }
+                to='books/all'
+                onClick={clickAllCategory}
+              >
+                Все книги
+              </NavLink>
+            </li>
             {!loadingCategory && !loadingBoook
-              ? category &&
-                category.map((item) => (
-                  <li
-                    key={item.id}
-                    className='navigation-book__item'
-                    data-test-id={widthScreen > 769 ? 'navigation-books' : 'burger-books'}
-                  >
+              ? countCategory &&
+                countCategory.map((item) => (
+                  <li key={item.id} className='navigation-book__item'>
                     <NavLink
                       className={({ isActive }) =>
                         isActive ? 'active-main-link link-book' : 'navigation-book__link link-book'
                       }
                       to={`books/${item.path}`}
-                      onClick={() => {
-                        addColor();
-                        closeBurger();
-                      }}
-                      data-test-id='burger-books'
+                      onClick={() => clickCategory(item.name)}
+                      data-test-id={
+                        widthScreenRes && widthScreenRes > 769 ? `navigation-${item.path}` : `burger-${item.path}`
+                      }
                     >
                       {item.name}
                     </NavLink>
-                    <span className='count-book'>10</span>
+                    <span
+                      className='count-book'
+                      data-test-id={
+                        widthScreenRes && widthScreenRes > 769
+                          ? `navigation-book-count-for-${item.path}`
+                          : `burger-book-count-for-${item.path}`
+                      }
+                    >
+                      {item.count}
+                    </span>
                   </li>
                 ))
               : null}
@@ -142,11 +225,7 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
         <ul className='navigation-page__list'>
           <li
             className='navigation-page__item'
-            onClick={() => {
-              addHideBooksBlock();
-              removeColor();
-              closeBurger();
-            }}
+            onClick={clickDogovorRules}
             data-test-id={widthScreen > 769 ? 'navigation-terms' : 'burger-terms'}
           >
             <NavLink
@@ -158,11 +237,7 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
           </li>
           <li
             className='navigation-page__item'
-            onClick={() => {
-              addHideBooksBlock();
-              removeColor();
-              closeBurger();
-            }}
+            onClick={clickDogovorRules}
             data-test-id={widthScreen > 769 ? 'navigation-contract' : 'burger-contract'}
           >
             <NavLink

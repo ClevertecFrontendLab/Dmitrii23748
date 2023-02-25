@@ -19,7 +19,7 @@ export const LayoutNavComponent: React.FC<IBurger> = ({ burger, closeBurger, tog
 
 
   return (
-    <section className='layout-nav'>
+    <section className='layout-nav' onClick={closeBurger}>
       <div className='container'>
         <div className='aside__block'>
           <NameNavComponent

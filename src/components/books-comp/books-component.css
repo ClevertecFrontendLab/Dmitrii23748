@@ -1,18 +1,42 @@
 .books-flex {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    row-gap: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  row-gap: 24px;
+}
+
+.book {
+  margin-right: 15px;
 }
 
 .book-row__comp {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.blocks-book__no-category {
+  margin: 200px auto 0 auto;
+  text-align: center;
+}
+
+.text__no-category {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: 0.1px;
+  color: #a7a7a7;
+
 }
 
 @media (max-width: 620px) {
-    .books-flex {
-        justify-content: space-evenly;
-    }
+  .books-flex {
+    justify-content: space-evenly;
+  }
+  .blocks-book__no-category {
+    margin: 120px auto 0 auto;
+  }
+  .text__no-category {
+    font-size: 18px;
+    line-height: 28px;
+  }
 }
-

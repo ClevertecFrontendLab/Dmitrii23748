@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import arrow from '../../assets/images/arrow/arrow-reviews.svg';
 import avatar from '../../assets/images/single/avatar-small.png';
@@ -21,7 +21,8 @@ import { useResize } from '../../utils/useResize';
 import './single-book-page.css';
 
 export const SingleBookPage: React.FC<IBurger> = ({ closeBurger, burger, removeArrowOrange }) => {
-  const { idbook } = useParams();
+  const { idbook, namecategory } = useParams();
+
   const { widthRes } = useResize();
 
   const [reviews, setReviews] = useState(true);
@@ -61,12 +62,16 @@ export const SingleBookPage: React.FC<IBurger> = ({ closeBurger, burger, removeA
             <div className='single-book__breadpoint'>
               <div className='container'>
                 <div className='breadpoint-text__flex'>
-                  <span className='breadpoint-text breadpoint-text__elem'>
-                    {bookSingle.categories && bookSingle.categories.length > 0
+                  <Link
+                    to={`/books/${namecategory}`}
+                    className='breadpoint-text breadpoint-text__elem'
+                    data-test-id='breadcrumbs-link'
+                  >
+                    {bookSingle.categories && bookSingle.categories.length > 0 && namecategory !== 'all'
                       ? bookSingle.categories[0]
-                      : 'Бизнес книги'}
-                  </span>
-                  <span className='breadpoint-text'>{bookSingle.title}</span>
+                      : 'Все книги'}
+                  </Link>
+                  <span className='breadpoint-text' data-test-id="book-name">{bookSingle.title}</span>
                 </div>
               </div>
             </div>
@@ -83,7 +88,7 @@ export const SingleBookPage: React.FC<IBurger> = ({ closeBurger, burger, removeA
                       </div>
 
                       <div className='single-book__main-text'>
-                        <h2 className='single-book__main-title'>{bookSingle.title}</h2>
+                        <h2 className='single-book__main-title' data-test-id="book-title">{bookSingle.title}</h2>
                         <p className='single-book__main-author'>
                           {bookSingle.authors}, {bookSingle.issueYear}
                         </p>

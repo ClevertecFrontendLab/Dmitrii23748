@@ -77,6 +77,7 @@
   margin-right: 6px;
   letter-spacing: 0.1px;
   transition: color 0.2s ease-in;
+  text-transform: capitalize;
 }
 
 .navigation-book__link:hover {

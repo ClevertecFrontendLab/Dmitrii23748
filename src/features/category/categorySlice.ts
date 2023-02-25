@@ -1,4 +1,5 @@
 /* eslint-disable unicorn/filename-case */
+/* eslint-disable no-return-assign */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable import/no-default-export */
 /* eslint-disable no-param-reassign */
@@ -47,7 +48,6 @@ export const categorySlice = createSlice({
       });
   },
 });
-
 export default categorySlice.reducer;
 function isError(action: AnyAction) {
     return action.type.endsWith('rejected');
