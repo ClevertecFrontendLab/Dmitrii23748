@@ -63,7 +63,6 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
       dispatch(sortedDown());
     }
   };
-
   const countArrCategory = (name: string) => {
     let count = 0;
 
