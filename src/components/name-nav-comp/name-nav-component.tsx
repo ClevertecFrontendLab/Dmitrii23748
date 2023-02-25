@@ -55,9 +55,9 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
 
   const sortedBooks = () => {
     if (sort === 'up') {
-      dispatch(sortedDown());
-    } else if (sort === 'down') {
       dispatch(sortedUp());
+    } else if (sort === 'down') {
+      dispatch(sortedDown());
     }
   };
 
@@ -71,6 +71,28 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
     }
 
     return count;
+  };
+
+  const clickDogovorRules = () => {
+    addHideBooksBlock();
+    removeColor();
+    closeBurger();
+  };
+
+  const clickAllCategory = () => {
+    addColor();
+    closeBurger();
+    dispatch(allBook(booksFilter));
+    dispatch(filteredBookSearch(localStorage.getItem('search')));
+    sortedBooks();
+  };
+
+  const clickCategory = (name: string) => {
+    addColor();
+    closeBurger();
+    filtersBookNameCategory(name);
+    localStorage.setItem('searchFlag', 'false');
+    sortedBooks();
   };
 
   useEffect(() => {
@@ -162,14 +184,7 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
                   isActive ? 'active-main-link link-book navigation-title__link' : 'navigation-book__link link-book'
                 }
                 to='books/all'
-                onClick={() => {
-                  addColor();
-                  closeBurger();
-                  dispatch(allBook(booksFilter));
-                  dispatch(filteredBookSearch(localStorage.getItem('search')));
-                  sortedBooks();
-                }}
-                // data-test-id={widthScreenRes && widthScreenRes > 960 ? 'navigation-books' : 'burger-books'}
+                onClick={clickAllCategory}
               >
                 Все книги
               </NavLink>
@@ -177,24 +192,13 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
             {!loadingCategory && !loadingBoook
               ? countCategory &&
                 countCategory.map((item) => (
-                  <li
-                    key={item.id}
-                    className='navigation-book__item'
-                  >
+                  <li key={item.id} className='navigation-book__item'>
                     <NavLink
                       className={({ isActive }) =>
                         isActive ? 'active-main-link link-book' : 'navigation-book__link link-book'
                       }
                       to={`books/${item.path}`}
-                      onClick={() => {
-                        addColor();
-                        closeBurger();
-                        filtersBookNameCategory(item.name);
-                        localStorage.setItem('searchFlag', 'false');
-                        sortedBooks();
-                      }}
-
-                      //   data-test-id='burger-books'
+                      onClick={() => clickCategory(item.name)}
                       data-test-id={
                         widthScreenRes && widthScreenRes > 769 ? `navigation-${item.path}` : `burger-${item.path}`
                       }
@@ -221,11 +225,7 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
         <ul className='navigation-page__list'>
           <li
             className='navigation-page__item'
-            onClick={() => {
-              addHideBooksBlock();
-              removeColor();
-              closeBurger();
-            }}
+            onClick={clickDogovorRules}
             data-test-id={widthScreen > 769 ? 'navigation-terms' : 'burger-terms'}
           >
             <NavLink
@@ -237,11 +237,7 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
           </li>
           <li
             className='navigation-page__item'
-            onClick={() => {
-              addHideBooksBlock();
-              removeColor();
-              closeBurger();
-            }}
+            onClick={clickDogovorRules}
             data-test-id={widthScreen > 769 ? 'navigation-contract' : 'burger-contract'}
           >
             <NavLink

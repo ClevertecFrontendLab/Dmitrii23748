@@ -17,6 +17,7 @@ import selectUp from '../../assets/images/control/select-up.svg';
 import { filteredBookSearch, sortedDown, sortedUp } from '../../features/books/booksSlice';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import { IControl } from '../../utils/type';
+import { ButtonComponent } from '../button-comp';
 import { SearchAdaptiveComponent } from '../search-adaptive-comp';
 
 import './control-component.css';
@@ -55,7 +56,6 @@ export const ControlComponent: React.FC<IControl> = ({ bgColor, togleBgColor }) 
       inputRef.current.focus();
     }
   }, []);
-
 
   return (
     <div className='control'>
@@ -100,22 +100,18 @@ export const ControlComponent: React.FC<IControl> = ({ bgColor, togleBgColor }) 
             </div>
           </div>
           <div className='control__btn-block'>
-            <button
-              data-test-id='button-menu-view-window'
-              className={bgColor ? 'control__btn-column' : 'control__btn-column  btn-bg-control'}
-              type='button'
-              onClick={togleBgColor}
-            >
-              <img src={bgColor ? column : columnWhite} alt='column' />
-            </button>
-            <button
-              data-test-id='button-menu-view-list'
-              className={bgColor ? 'control__btn-list btn-bg-control' : 'control__btn-list'}
-              type='button'
-              onClick={togleBgColor}
-            >
-              <img src={bgColor ? listWhite : list} alt='list' />
-            </button>
+            <ButtonComponent
+              test='button-menu-view-window'
+              controlbtn={bgColor ? 'control__btn-column' : 'control__btn-column  btn-bg-control'}
+              togleBgColor={togleBgColor}
+              imgButton={bgColor ? column : columnWhite}
+            />
+            <ButtonComponent
+              test='button-menu-view-list'
+              controlbtn={bgColor ? 'control__btn-list btn-bg-control' : 'control__btn-list'}
+              togleBgColor={togleBgColor}
+              imgButton={bgColor ? listWhite : list}
+            />
           </div>
         </React.Fragment>
       )}
