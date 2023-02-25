@@ -49,7 +49,6 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
   const hideBooksBlock = () => {
     setHideBooks(!hideBooks);
   };
-
   const addHideBooksBlock = () => {
     setHideBooks(false);
   };
