@@ -80,7 +80,6 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
     removeColor();
     closeBurger();
   };
-
   const clickAllCategory = () => {
     addColor();
     closeBurger();
