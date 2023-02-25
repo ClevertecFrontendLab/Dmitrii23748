@@ -76,10 +76,8 @@ export const ControlComponent: React.FC<IControl> = ({ bgColor, togleBgColor }) 
                 onBlur={() => setStateSearch(false)}
                 value={localStorage.getItem('search')!}
               />
-
               <img className='search-img' src={stateSearch ? searchOrange : search} alt='search' />
             </div>
-
             <div className='search-block__small'>
               <button className='search-btn__small' type='button' onClick={toggleSearch}>
                 <img
