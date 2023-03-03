@@ -1,7 +1,8 @@
+/* eslint-disable react/jsx-no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-negated-condition */
 import { useEffect, useState } from 'react';
-import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { HashRouter, Navigate, Route, Routes} from 'react-router-dom';
 
 import { getCategory } from '../../features/category/categorySlice';
 import { useAppDispatch } from '../../hook';
@@ -37,6 +38,14 @@ export const App = () => {
   useEffect(() => {
     dispatch(getCategory());
   }, []);
+
+//   useEffect(() => {
+//     if (localStorage.getItem('token') && location.pathname === '/auth') {
+//       navigate('/');
+//     }
+//     console.log('sdfsgfsgs');
+
+//   }, [localStorage.getItem('token')]);
 
   return (
     <HashRouter>
@@ -78,10 +87,8 @@ export const App = () => {
             />
           </Route>
         </Route>
-
-        <Route path='auth' element={<AuthRootComponent/>}/>
-        <Route path='registration' element={<AuthRootComponent/>}/>
-
+        <Route path='auth' element={<AuthRootComponent />} />
+        <Route path='registration' element={<AuthRootComponent />} />
       </Routes>
     </HashRouter>
   );

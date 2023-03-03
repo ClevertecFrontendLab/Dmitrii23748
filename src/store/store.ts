@@ -5,12 +5,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import bookSingleSlice from '../features/book-single/bookSingleSlice';
 import booksSlice from '../features/books/booksSlice';
 import categorySlice from '../features/category/categorySlice';
+import loginUserSlice from '../features/login/loginUserSlice';
 
 const store = configureStore({
   reducer: {
     booksRed: booksSlice,
     categoryRed: categorySlice,
-    bookSingleRed: bookSingleSlice
+    bookSingleRed: bookSingleSlice,
+    loginUser: loginUserSlice
   },
 });
 

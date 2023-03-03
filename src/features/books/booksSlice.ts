@@ -11,13 +11,7 @@ import axios from 'axios';
 
 import { IBoooks, IBoooksingle } from '../../utils/type';
 
-const initialState: IBoooks = {
-  books: [],
-  booksFilter: [],
-  loadingBoook: false,
-  errorBook: null,
-  sort: 'down',
-};
+
 
 export const getBooks = createAsyncThunk<IBoooksingle[]>('books/getBooks', async (_, { rejectWithValue }) => {
   const res = await axios.get('https://strapi.cleverland.by/api/books');
@@ -30,6 +24,14 @@ export const getBooks = createAsyncThunk<IBoooksingle[]>('books/getBooks', async
     itemA.rating < itemB.rating ? 1 : -1
   );
 });
+
+const initialState: IBoooks = {
+    books: [],
+    booksFilter: [],
+    loadingBoook: false,
+    errorBook: null,
+    sort: 'down',
+  };
 
 export const booksSlice = createSlice({
   name: 'books',
