@@ -5,21 +5,19 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { AnyAction,createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { AnyAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+import { instance } from '../../utils/axios/axios';
 import { ICategory, ICategorys } from '../../utils/type';
 
-
-
-const initialState:ICategorys = {
+const initialState: ICategorys = {
   category: [],
   loadingCategory: false,
   error: null,
 };
 
-export const getCategory = createAsyncThunk<ICategory[]>('category/getCategory', async (_,{rejectWithValue}) => {
-  const res = await axios.get('https://strapi.cleverland.by/api/categories');
+export const getCategory = createAsyncThunk<ICategory[]>('category/getCategory', async (_, { rejectWithValue }) => {
+  const res = await instance.get('categories');
 
   if (res.status !== 200) {
     return rejectWithValue(new Error('error'));
@@ -50,5 +48,5 @@ export const categorySlice = createSlice({
 });
 export default categorySlice.reducer;
 function isError(action: AnyAction) {
-    return action.type.endsWith('rejected');
-  }
+  return action.type.endsWith('rejected');
+}

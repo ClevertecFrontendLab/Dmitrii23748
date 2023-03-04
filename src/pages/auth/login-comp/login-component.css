@@ -1,0 +1,78 @@
+.login-title {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+  letter-spacing: 0.1px;
+  color: #363636;
+  margin-bottom: 32px;
+}
+
+.input-elem {
+  background: #f9f9fa;
+  border-radius: 4px 4px 0 0;
+  width: 416px;
+  height: 56px;
+  border: none;
+  outline: none;
+  padding: 0 12px;
+}
+
+.login-input {
+  margin-bottom: 36px;
+}
+
+.login-password {
+  margin-bottom: 20px;
+}
+
+.forget-block {
+  margin-bottom: 32px;
+}
+
+.forget-text {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.2px;
+  color: #a7a7a7;
+}
+
+.btn-block {
+  margin-bottom: 16px;
+}
+
+.btn-text {
+  width: 100%;
+  background: linear-gradient(231.58deg, #f83600 -53.35%, #f9d423 297.76%);
+  border-radius: 30px;
+  border: none;
+  padding: 14px 0;
+
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.accounting-text {
+  display: inline-block;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.1px;
+  color: #727272;
+  margin-right: 18px;
+}
+
+.registration-text {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  color: #363636;
+}

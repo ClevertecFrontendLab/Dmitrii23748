@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { BooksComponent } from '../../components/books-comp';
 import { ControlComponent } from '../../components/control-comp';

@@ -11,6 +11,8 @@ import { useAppDispatch, useAppSelector } from '../../hook';
 import { LoginComponent } from './login-comp';
 import { RegistrComponent } from './registr-comp';
 
+import './auth-root-component.css';
+
 export const AuthRootComponent = () => {
   const dispatch = useAppDispatch();
   const { isLoad } = useAppSelector((state) => state.loginUser);
@@ -61,9 +63,10 @@ export const AuthRootComponent = () => {
   }, []);
 
   return (
-    <div>
+    <div className='auth-wrapper'>
       {isLoad ? <LoadComponent /> : null}
-      <form onSubmit={handleSubmit}>
+      <h2 className='auth-title'>Cleverland</h2>
+      <form className='auth-form' onSubmit={handleSubmit}>
         {location.pathname === '/auth' ? (
           <LoginComponent
             setIdentifier={setIdentifier}

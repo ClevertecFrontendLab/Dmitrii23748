@@ -1,0 +1,23 @@
+
+.reg-block {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+}
+
+.reg-title {
+  margin-bottom: 8px;
+}
+
+.steps-text {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  color: #363636;
+}
+
+
+  .login-registr {
+    margin-bottom: 68px;
+  }

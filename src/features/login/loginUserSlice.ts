@@ -17,6 +17,7 @@ export const loginUser = createAsyncThunk('login/loginUser', async (data: ILogin
     const user = await instance.post('auth/local', data);
 
     localStorage.setItem('token', user.data.jwt);
+    localStorage.setItem('userName', user.data.user.username)
 
     return user.data;
   } catch (error) {
@@ -30,7 +31,8 @@ const initialState = {
   user: {},
   isLogin: false,
   isLoad: false,
-  isError: false
+  isError: false,
+  isCategory: false,
 };
 
 const loginUserSlice = createSlice({
@@ -47,6 +49,7 @@ const loginUserSlice = createSlice({
         state.user = action.payload;
         state.isLogin = true;
         state.isLoad = false;
+        state.isCategory = true;
       })
       .addCase(loginUser.rejected, (state) => {
         state.isLogin = false;

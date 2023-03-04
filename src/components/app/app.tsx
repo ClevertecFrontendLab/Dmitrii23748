@@ -1,11 +1,9 @@
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-negated-condition */
-import { useEffect, useState } from 'react';
-import { HashRouter, Navigate, Route, Routes} from 'react-router-dom';
+import { useState } from 'react';
+import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 
-import { getCategory } from '../../features/category/categorySlice';
-import { useAppDispatch } from '../../hook';
 import { AuthRootComponent } from '../../pages/auth/auth-root-component';
 import { DogovorPage } from '../../pages/dogovor';
 import { MainPage } from '../../pages/main';
@@ -16,7 +14,6 @@ import { Layout } from '../layout-comp';
 import { LayoutNavComponent } from '../layout-nav-comp';
 
 export const App = () => {
-  const dispatch = useAppDispatch();
   const [burger, setBurger] = useState(true);
   const [colorArrowOrange, setColorArrowOrange] = useState(true);
 
@@ -34,18 +31,6 @@ export const App = () => {
   const removeArrowOrange = () => {
     setColorArrowOrange(false);
   };
-
-  useEffect(() => {
-    dispatch(getCategory());
-  }, []);
-
-//   useEffect(() => {
-//     if (localStorage.getItem('token') && location.pathname === '/auth') {
-//       navigate('/');
-//     }
-//     console.log('sdfsgfsgs');
-
-//   }, [localStorage.getItem('token')]);
 
   return (
     <HashRouter>

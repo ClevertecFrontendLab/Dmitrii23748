@@ -13,17 +13,9 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 
 import React, { useEffect, useState } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-import {
-  allBook,
-  filteredBook,
-  filteredBookSearch,
-  getBooks,
-  sortedDown,
-  sortedUp,
-} from '../../features/books/booksSlice';
-import { getCategory } from '../../features/category/categorySlice';
+import { allBook, filteredBook, filteredBookSearch, sortedDown, sortedUp } from '../../features/books/booksSlice';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import { IBurger } from '../../utils/type';
 
@@ -106,10 +98,6 @@ export const NameNavComponent: React.FC<IBurger> = ({ burger, closeBurger, idboo
   useEffect(() => {
     setWidth(window.innerWidth);
   }, [burger]);
-
-  useEffect(() => {
-    dispatch(getBooks());
-  }, []);
 
   useEffect(() => {
     const copyCategory = [...category];

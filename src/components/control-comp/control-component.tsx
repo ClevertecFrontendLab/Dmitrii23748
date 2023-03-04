@@ -35,7 +35,7 @@ export const ControlComponent: React.FC<IControl> = ({ bgColor, togleBgColor }) 
   };
 
   const filteredSearch = () => {
-    dispatch(filteredBookSearch(inputRef.current?.value));
+    dispatch(filteredBookSearch(inputRef.current!.value));
     localStorage.setItem('search', inputRef.current!.value);
     localStorage.setItem('searchFlag', 'true');
   };

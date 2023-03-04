@@ -7,14 +7,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { AnyAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
 
+import { instance } from '../../utils/axios/axios';
 import { IBoooks, IBoooksingle } from '../../utils/type';
 
 
 
 export const getBooks = createAsyncThunk<IBoooksingle[]>('books/getBooks', async (_, { rejectWithValue }) => {
-  const res = await axios.get('https://strapi.cleverland.by/api/books');
+  const res = await instance.get('books');
 
   if (res.status !== 200) {
     return rejectWithValue(new Error('error'));

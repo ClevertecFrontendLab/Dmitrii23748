@@ -3,7 +3,8 @@
 /* eslint-disable import/no-default-export */
 /* eslint-disable no-param-reassign */
 import { AnyAction,createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import axios from 'axios';
+
+import { instance } from '../../utils/axios/axios';
 
 const initialState:any = {
   bookSingle: {},
@@ -12,7 +13,7 @@ const initialState:any = {
 };
 
 export const getBookSingle = createAsyncThunk('bookSingle/getBookSingle', async ( id: number | string, {rejectWithValue}) => {
-  const res = await axios.get(`https://strapi.cleverland.by/api/books/${id}`);
+  const res = await instance.get(`books/${id}`);
 
   if (res.status !== 200) {
     return rejectWithValue(new Error('error'));

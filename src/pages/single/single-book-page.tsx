@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-negated-condition */
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -221,8 +223,8 @@ export const SingleBookPage: React.FC<IBurger> = ({ closeBurger, burger, removeA
                       </div>
                       <ul className={reviews ? 'single-book__reviews-list' : 'single-book__reviews-list reviews-none'}>
                         {bookSingle.comments
-                          ? bookSingle.comments.map((item: any) => (
-                              <li className='single-book__reviews-item'>
+                          ? bookSingle.comments.map((item: any, i: number | string) => (
+                              <li className='single-book__reviews-item' key={i}>
                                 <div className='single-book__reviews-person'>
                                   <img
                                     className='single-book__reviews-avatar'

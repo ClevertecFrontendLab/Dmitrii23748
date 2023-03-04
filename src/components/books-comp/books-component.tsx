@@ -6,9 +6,10 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 
 import { getBookSingle } from '../../features/book-single/bookSingleSlice';
+import { getBooks } from '../../features/books/booksSlice';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import { IBurger } from '../../utils/type';
 import { BookColumnComponent } from '../book-column-comp';
@@ -19,6 +20,7 @@ import { LoadComponent } from '../load-comp';
 import './books-component.css';
 
 export const BooksComponent: React.FC<IBurger> = ({ bgColor, closeBurger }) => {
+  const location = useLocation();
   const dispatch = useAppDispatch();
   const { namecategory } = useParams();
   const { books, loadingBoook, errorBook } = useAppSelector((state) => state.booksRed);
@@ -33,6 +35,22 @@ export const BooksComponent: React.FC<IBurger> = ({ bgColor, closeBurger }) => {
 
     setStateBooks(sfsafs);
   };
+
+  useEffect(() => {
+    if (location.pathname === '/' || location.pathname === '/books/all') {
+      dispatch(getBooks());
+    }
+  }, []);
+
+  useEffect(() => {
+    if (category) {
+      category.forEach((item) => {
+        if (location.pathname === `/books/${item.path}`) {
+          dispatch(getBooks());
+        }
+      });
+    }
+  }, [category]);
 
   useEffect(() => {
     setStateBooks([...books]);
@@ -59,16 +77,18 @@ export const BooksComponent: React.FC<IBurger> = ({ bgColor, closeBurger }) => {
         ) : (
           <LoadComponent />
         )}
-        {stateBooks.length === 0 &&
-        localStorage.getItem('searchFlag') === 'true' ? (
+        {stateBooks.length === 0 && localStorage.getItem('searchFlag') === 'true' ? (
           <div className='blocks-book__no-category'>
-            <span className='text__no-category'  data-test-id="search-result-not-found">По запросу ничего не найдено</span>
+            <span className='text__no-category' data-test-id='search-result-not-found'>
+              По запросу ничего не найдено
+            </span>
           </div>
         ) : null}
-        {stateBooks.length === 0 &&
-        localStorage.getItem('searchFlag') === 'false' ? (
+        {stateBooks.length === 0 && localStorage.getItem('searchFlag') === 'false' ? (
           <div className='blocks-book__no-category'>
-            <span className='text__no-category'  data-test-id="empty-category">В этой категории книг ещё нет</span>
+            <span className='text__no-category' data-test-id='empty-category'>
+              В этой категории книг ещё нет
+            </span>
           </div>
         ) : null}
       </ul>
